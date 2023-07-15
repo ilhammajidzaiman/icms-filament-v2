@@ -7,17 +7,32 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+# Contents
+
+-   [Laravel](#laravel)
+-   [Filamentphp](#dependencies-title)
+-   [Filament Access and Menu Management Plugin](#filament-access-and-menu-management-plugin)
+    -   [Instalation](#installation)
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+# Laravel
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Simple, fast routing engine](https://laravel.com/docs/routing).
+-   [Powerful dependency injection container](https://laravel.com/docs/container).
+-   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+-   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+-   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+-   [Robust background job processing](https://laravel.com/docs/queues).
+-   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
@@ -35,19 +50,19 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+-   **[Vehikl](https://vehikl.com/)**
+-   **[Tighten Co.](https://tighten.co)**
+-   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+-   **[64 Robots](https://64robots.com)**
+-   **[Cubet Techno Labs](https://cubettech.com)**
+-   **[Cyber-Duck](https://cyber-duck.co.uk)**
+-   **[Many](https://www.many.co.uk)**
+-   **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+-   **[DevSquad](https://devsquad.com)**
+-   **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+-   **[OP.GG](https://op.gg)**
+-   **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+-   **[Lendio](https://lendio.com)**
 
 ## Contributing
 
@@ -64,3 +79,133 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+[To Top](#contents)
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+# Filament Access and Menu Management Plugin
+
+## Installation
+
+Install the package via composer:
+
+```bash
+composer require solution-forest/filament-access-management
+```
+
+Add the necessary trait to **User** model:
+
+```bash
+use SolutionForest\FilamentAccessManagement\Concerns\FilamentUser;
+
+class User extends Authenticatable
+{
+    use FilamentUser;
+}
+```
+
+Clear config cache:
+
+```bash
+php artisan optimize:clear
+# or
+php artisan config:clear
+```
+
+Execute the commands:
+
+```bash
+php artisan filament-access-management:install
+```
+
+If you don't already have a user named admin, this command creates a Super Admin User with the following credentials:
+
+Name: admin
+E-mail address: admin@("slug" pattern from config("app.name")).com
+Password: admin
+
+You can also create the super admin user with:
+
+```bash
+php artisan make:super-admin-user
+```
+
+Add in **config/app.php**:
+
+```bash
+'providers' => [
+    /*
+    * Package Service Providers...
+    */
+
+    \SolutionForest\FilamentAccessManagement\FilamentAuthServiceProvider::class,
+],
+```
+
+### Publish Configs, Views, Translations and Migrations
+
+Publish the configs, views, translations and migrations:
+
+```bash
+php artisan vendor:publish --tag="filament-access-management-config"
+php artisan vendor:publish --tag="filament-access-management-views"
+php artisan vendor:publish --tag="filament-access-management-translations"
+php artisan vendor:publish --tag="filament-access-management-migrations"
+```
+
+## Migration
+
+```bash
+php artisan migrate
+```
+
+Create super admin user:
+
+```bash
+php artisan make:super-admin-user
+```
+
+Check permission:
+
+```bash
+# Check by permission's name
+\SolutionForest\FilamentAccessManagement\Http\Auth\Permission::check($name)
+# Check by http_path
+\SolutionForest\FilamentAccessManagement\Http\Auth\Permission::checkPermission($path)
+```
+
+Get current user:
+
+```bash
+\SolutionForest\FilamentAccessManagement\Facades\FilamentAuthenticate::user();
+```
+
+## Advance Usage
+
+In default, the menu created will co-exist with the original menu of filament. To override the original menu with the menu from this package, modify **/config/filament-access-management.php** as following:
+
+Set filament.navigation.enabled => true
+
+```bash
+'filament' => [
+    'navigation' => [
+        /**
+         * Using db based filament navigation if true.
+         */
+        'enabled' => true,
+        /**
+         * Table name db based filament navigation.
+         */
+        'table_name' => 'filament_menu',
+        /**
+         * Filament Menu Model.
+         */
+        'model' => Models\Menu::class,
+    ]
+]
+```
