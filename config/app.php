@@ -159,6 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
+        \SolutionForest\FilamentAccessManagement\FilamentAuthServiceProvider::class,
 
         /*
          * Application Service Providers...
