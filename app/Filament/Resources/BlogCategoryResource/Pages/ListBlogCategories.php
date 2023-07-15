@@ -21,8 +21,8 @@ class ListBlogCategories extends ListRecords
     protected function getTableActions(): array
     {
         return [
+            Tables\Actions\ViewAction::make(),
             Tables\Actions\ActionGroup::make([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ]),
