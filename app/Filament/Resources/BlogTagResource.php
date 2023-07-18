@@ -25,7 +25,7 @@ class BlogTagResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $navigationLabel = 'Tag';
-    protected static ?string $slug = 'tags';
+    protected static ?string $slug = 'tag';
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
