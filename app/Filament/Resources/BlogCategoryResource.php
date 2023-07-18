@@ -29,7 +29,7 @@ class BlogCategoryResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-bookmark';
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $navigationLabel = 'Kategori';
-    protected static ?string $slug = 'kategoris';
+    protected static ?string $slug = 'categories';
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
@@ -98,7 +98,7 @@ class BlogCategoryResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             // ->actions([
-            //     Tables\Actions\ViewAction::make(),
+            //     Tables\Actions\ViewAction::make()->label('Edit okeeee'),
             // ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
