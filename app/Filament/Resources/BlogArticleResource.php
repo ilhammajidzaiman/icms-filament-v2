@@ -24,8 +24,10 @@ use App\Filament\Resources\BlogArticleResource\RelationManagers;
 class BlogArticleResource extends Resource
 {
     protected static ?string $model = BlogArticle::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationLabel = 'Artikel';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

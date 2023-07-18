@@ -22,10 +22,10 @@ use App\Filament\Resources\BlogCategoryResource\RelationManagers;
 class BlogCategoryResource extends Resource
 {
     protected static ?string $model = BlogCategory::class;
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark';
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $navigationLabel = 'Kategori';
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
