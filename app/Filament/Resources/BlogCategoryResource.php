@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use Closure;
+use stdClass;
 use Filament\Forms;
 use Filament\Tables;
 use Illuminate\Support\Str;
@@ -13,7 +14,9 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Field;
+use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\SelectColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BlogCategoryResource\Pages;
@@ -59,23 +62,41 @@ class BlogCategoryResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('index')
+                    ->label('Nomor')
+                    ->getStateUsing(
+                        static function (stdClass $rowLoop, HasTable $livewire): string {
+                            return (string) ($rowLoop->iteration +
+                                ($livewire->tableRecordsPerPage * ($livewire->page - 1
+                                ))
+                            );
+                        }
+                    ),
+                Tables\Columns\TextColumn::make('id')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nama')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime()
-                    ->sortable()
-                    ->searchable(),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diubah')
                     ->dateTime()
                     ->sortable()
-                    ->searchable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->label('Dihapus')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
             // ->actions([
-            //     Tables\Actions\EditAction::make(),
+            //     Tables\Actions\ViewAction::make(),
             // ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
