@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('uuid')->unique();
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->restrictOnDelete()->comment('id table users');
             // $table->foreignId('blog_status_id')->constrained('blog_statuses')->cascadeOnUpdate()->restrictOnDelete()->comment('id table blog_statuses');
-            $table->boolean('is_active')->comment('status artikel');
-            $table->string('title')->unique()->comment('judul artikel');
+            $table->boolean('is_active')->comment('status');
+            $table->string('title')->unique()->comment('judul');
             $table->string('slug')->unique()->comment('slug dari judul');
             $table->binary('content')->comment('bagian isi artikel');
             $table->string('truncated')->comment('review artikel');
