@@ -14,12 +14,14 @@ use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use Livewire\TemporaryUploadedFile;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Columns\ToggleColumn;
@@ -68,16 +70,14 @@ class BlogArticleResource extends Resource
                             ->label('Status')
                             ->required()
                             ->default('1'),
-                        TextInput::make('user_id')
+                        Hidden::make('user_id')
                             ->label('Id Penulis')
                             ->required()
-                            ->maxLength(255)
                             ->default(auth()->id())
                             ->disabled(),
-                        TextInput::make('visitor')
+                        Hidden::make('visitor')
                             ->label('Pengunjung')
                             ->required()
-                            ->maxLength(255)
                             ->default(0)
                             ->disabled(),
                         Select::make('blog_category_id')
@@ -96,6 +96,11 @@ class BlogArticleResource extends Resource
                             ->required()
                             ->maxSize(1024)
                             ->directory('article')
+                            ->image()
+                            // ->imageResizeMode('cover')
+                            // ->imageCropAspectRatio('16:9')
+                            // ->imageResizeTargetWidth('1920')
+                            // ->imageResizeTargetHeight('1080')
                             ->enableDownload()
                             ->enableOpen()
                             ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
@@ -137,9 +142,8 @@ class BlogArticleResource extends Resource
                     ->label('Slug')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('file')
+                ImageColumn::make('file')
                     ->label('File')
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('visitor')
                     ->label('Pengunjung')
