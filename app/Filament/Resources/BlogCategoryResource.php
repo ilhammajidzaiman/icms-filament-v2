@@ -38,14 +38,6 @@ class BlogCategoryResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        Grid::make(3)
-                            ->schema([
-                                TextInput::make('uuid')
-                                    ->required()
-                                    ->maxLength(255),
-                            ]),
-                        // Field::make('uuid')->uuid(),
-                        // Uuid::make('uuid'),
                         TextInput::make('name')
                             ->required()
                             ->maxLength(255)
@@ -74,7 +66,10 @@ class BlogCategoryResource extends Resource
                             );
                         }
                     ),
-                Tables\Columns\TextColumn::make('id')->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('id')
+                    ->label('Id')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->sortable()

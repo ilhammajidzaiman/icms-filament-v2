@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('blog_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid')->unique()->comment('unik id');
             $table->string('name')->unique()->comment('nama');
             $table->string('slug')->unique()->comment('slug');
             $table->timestamps();
