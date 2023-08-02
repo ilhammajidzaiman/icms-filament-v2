@@ -14,15 +14,14 @@ return new class extends Migration
         Schema::create('blog_articles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->restrictOnDelete()->comment('id table users');
-            // $table->foreignId('blog_status_id')->constrained('blog_statuses')->cascadeOnUpdate()->restrictOnDelete()->comment('id table blog_statuses');
+            $table->foreignId('blog_category_id')->constrained('blog_categories')->cascadeOnUpdate()->restrictOnDelete()->comment('id table blog_categories');
             $table->boolean('is_active')->comment('status');
             $table->string('title')->unique()->comment('judul');
             $table->string('slug')->unique()->comment('slug dari judul');
             $table->binary('content')->comment('bagian isi artikel');
-            $table->string('truncated')->comment('review artikel');
-            // $table->string('path')->nullable()->comment('folder file gambar artikel');
+            $table->string('tags')->nullable()->comment('menandai');
             $table->string('file')->nullable()->comment('file gambar artikel');
-            $table->bigInteger('counter')->nullable()->comment('jumlah pengunjung');
+            $table->bigInteger('visitor')->nullable()->comment('jumlah pengunjung');
             $table->timestamps();
             $table->softDeletes();
         });
