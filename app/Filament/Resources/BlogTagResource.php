@@ -6,31 +6,27 @@ use Closure;
 use stdClass;
 use Filament\Forms;
 use Filament\Tables;
+use App\Models\BlogTag;
 use Illuminate\Support\Str;
-use App\Models\BlogCategory;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Field;
 use Filament\Tables\Contracts\HasTable;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\SelectColumn;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\BlogTagResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\BlogCategoryResource\Pages;
-use App\Filament\Resources\BlogCategoryResource\RelationManagers;
+use App\Filament\Resources\BlogTagResource\RelationManagers;
 
-class BlogCategoryResource extends Resource
+class BlogTagResource extends Resource
 {
-    protected static ?string $model = BlogCategory::class;
-    protected static ?string $modelLabel = 'Kategori';
-    protected static ?string $navigationIcon = 'heroicon-o-bookmark';
+    protected static ?string $model = BlogTag::class;
+    protected static ?string $modelLabel = 'Tag';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationGroup = 'Blog';
-    protected static ?string $navigationLabel = 'Kategori';
-    protected static ?string $slug = 'categories';
-    protected static ?int $navigationSort = 1;
+    protected static ?string $navigationLabel = 'Tag';
+    protected static ?string $slug = 'tags';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -38,22 +34,20 @@ class BlogCategoryResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        Grid::make(3)
-                            ->schema([
-                                TextInput::make('uuid')
-                                    ->required()
-                                    ->maxLength(255),
-                            ]),
-                        // Field::make('uuid')->uuid(),
-                        // Uuid::make('uuid'),
-                        TextInput::make('name')
+                        Forms\Components\TextInput::make('uuid')
+                            ->label('Uuid')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nama')
                             ->required()
                             ->maxLength(255)
                             ->reactive()
                             ->afterStateUpdated(function (Closure $set, $state) {
                                 $set('slug', Str::slug($state));
                             }),
-                        TextInput::make('slug')
+                        Forms\Components\TextInput::make('slug')
+                            ->label('Slug')
                             ->required()
                             ->maxLength(255),
                     ]),
@@ -74,31 +68,42 @@ class BlogCategoryResource extends Resource
                             );
                         }
                     ),
-                Tables\Columns\TextColumn::make('id')->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('uuid')
+                    ->label('Uuid')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('slug')
+                    ->label('Slug')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Diubah')
                     ->dateTime()
                     ->sortable()
+                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->label('Dihapus')
                     ->dateTime()
                     ->sortable()
+                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
             // ->actions([
-            //     Tables\Actions\ViewAction::make()->label('Edit okeeee'),
+            //     Tables\Actions\EditAction::make(),
             // ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -117,9 +122,9 @@ class BlogCategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBlogCategories::route('/'),
-            'create' => Pages\CreateBlogCategory::route('/create'),
-            'edit' => Pages\EditBlogCategory::route('/{record}/edit'),
+            'index' => Pages\ListBlogTags::route('/'),
+            'create' => Pages\CreateBlogTag::route('/create'),
+            'edit' => Pages\EditBlogTag::route('/{record}/edit'),
         ];
     }
 

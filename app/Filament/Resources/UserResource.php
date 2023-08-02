@@ -20,9 +20,10 @@ use App\Filament\Resources\UserResource\RelationManagers;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationGroup = 'Admin';
+    protected static ?string $navigationLabel = 'User';
+    // protected static ?int $navigationSort = 3;
     public static function form(Form $form): Form
     {
         return $form
