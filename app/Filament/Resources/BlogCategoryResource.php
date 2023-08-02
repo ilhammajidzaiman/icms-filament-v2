@@ -13,8 +13,6 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Field;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
@@ -32,6 +30,7 @@ class BlogCategoryResource extends Resource
     protected static ?string $navigationLabel = 'Kategori';
     protected static ?string $slug = 'categories';
     protected static ?int $navigationSort = 1;
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {

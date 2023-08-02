@@ -39,6 +39,7 @@ class BlogArticleResource extends Resource
     protected static ?string $navigationLabel = 'Artikel';
     protected static ?string $slug = 'articles';
     protected static ?int $navigationSort = 2;
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Form $form): Form
     {
