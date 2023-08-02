@@ -69,7 +69,7 @@ class BlogArticleResource extends Resource
                             ->required()
                             ->default('1'),
                         TextInput::make('user_id')
-                            ->label('Penulis')
+                            ->label('Id Penulis')
                             ->required()
                             ->maxLength(255)
                             ->default(auth()->id())
@@ -91,12 +91,6 @@ class BlogArticleResource extends Resource
                             ->required()
                             ->separator(',')
                             ->suggestions(BlogCategory::all()->pluck('name')),
-                        // ->suggestions([
-                        //     'tailwindcss',
-                        //     'alpinejs',
-                        //     'laravel',
-                        //     'livewire',
-                        // ]),
                         FileUpload::make('file')
                             ->label('File')
                             ->required()
@@ -133,12 +127,12 @@ class BlogArticleResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('user_id')
-                    ->label('User')
+                    ->label('Penulis')
                     ->sortable(),
                 TextColumn::make('title')
                     ->label('Judul')
-                    ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('slug')
                     ->label('Slug')
                     ->sortable()
@@ -155,7 +149,7 @@ class BlogArticleResource extends Resource
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('updated_at')
-                    ->label('Diubah')
+                    ->label('Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -171,9 +165,9 @@ class BlogArticleResource extends Resource
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+            // ->actions([
+            //     Tables\Actions\EditAction::make(),
+            // ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\ForceDeleteBulkAction::make(),
