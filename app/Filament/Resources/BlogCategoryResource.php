@@ -6,6 +6,7 @@ use Closure;
 use stdClass;
 use Filament\Forms;
 use Filament\Tables;
+use Filament\SelectColumn;
 use Illuminate\Support\Str;
 use App\Models\BlogCategory;
 use Filament\Resources\Form;
@@ -14,9 +15,9 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Field;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\SelectColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BlogCategoryResource\Pages;
@@ -39,6 +40,7 @@ class BlogCategoryResource extends Resource
                 Card::make()
                     ->schema([
                         TextInput::make('name')
+                            ->label('Nama')
                             ->required()
                             ->maxLength(255)
                             ->reactive()
@@ -46,8 +48,10 @@ class BlogCategoryResource extends Resource
                                 $set('slug', Str::slug($state));
                             }),
                         TextInput::make('slug')
+                            ->label('Slug')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->disabled(),
                     ]),
             ]);
     }
@@ -56,8 +60,8 @@ class BlogCategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('index')
-                    ->label('Nomor')
+                TextColumn::make('index')
+                    ->label('#')
                     ->getStateUsing(
                         static function (stdClass $rowLoop, HasTable $livewire): string {
                             return (string) ($rowLoop->iteration +
@@ -66,24 +70,28 @@ class BlogCategoryResource extends Resource
                             );
                         }
                     ),
-                Tables\Columns\TextColumn::make('id')
+                TextColumn::make('id')
                     ->label('Id')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nama')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('slug')
+                    ->label('Slug')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label('Diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
+                TextColumn::make('deleted_at')
                     ->label('Dihapus')
                     ->dateTime()
                     ->sortable()
