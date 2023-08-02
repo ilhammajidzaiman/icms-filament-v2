@@ -70,7 +70,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // 'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'Asia/Jakarta'),
 
     /*
     |--------------------------------------------------------------------------
@@ -83,7 +84,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    // 'locale' => 'en',
+    'locale' => env('APP_LOCALE', 'id'),
 
     /*
     |--------------------------------------------------------------------------
@@ -109,7 +111,8 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    // 'faker_locale' => 'en_US',
+    'faker_locale' => env('APP_FAKERLOCALE', 'id_ID'),
 
     /*
     |--------------------------------------------------------------------------
