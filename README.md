@@ -9,10 +9,11 @@
 
 # Contents
 
--   [Laravel](#laravel)
--   [Filamentphp](#dependencies-title)
--   [Filament Access and Menu Management Plugin](#filament-access-and-menu-management-plugin)
-    -   [Instalation](#installation)
+1. [Laravel](#laravel)
+2. [Filamentphp](#filamentphp)
+    - [Instalation Filamentphp](#installation-filamentphp)
+3. [Filament Access and Menu Management Plugin](#filament-access-and-menu-management-plugin)
+    - [Instalation Plugin](#installation-plugin)
 
 <br>
 <br>
@@ -22,66 +23,47 @@
 
 # Laravel
 
-## About Laravel
+See more documentation of [here](https://laravel.com/docs/).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Installation
 
--   [Simple, fast routing engine](https://laravel.com/docs/routing).
--   [Powerful dependency injection container](https://laravel.com/docs/container).
--   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
--   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
--   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
--   [Robust background job processing](https://laravel.com/docs/queues).
--   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Install larvel using composer:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+composer create-project laravel/laravel example-app
+```
 
-## Learning Laravel
+[to top ☝️](#contents)
+<br>
+<br>
+<br>
+<br>
+<br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Filamentphp
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+See more documentation of Filamentphp [here](https://filamentphp.com/docs/).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation Filamentphp
 
-## Laravel Sponsors
+Install filamentphp:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+composer require filament/filament
+#or
+composer require filament/filament:"^2.0"
+```
 
-### Premium Partners
+Add to **composer.json**:
 
--   **[Vehikl](https://vehikl.com/)**
--   **[Tighten Co.](https://tighten.co)**
--   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
--   **[64 Robots](https://64robots.com)**
--   **[Cubet Techno Labs](https://cubettech.com)**
--   **[Cyber-Duck](https://cyber-duck.co.uk)**
--   **[Many](https://www.many.co.uk)**
--   **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
--   **[DevSquad](https://devsquad.com)**
--   **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
--   **[OP.GG](https://op.gg)**
--   **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
--   **[Lendio](https://lendio.com)**
+```bash
+"post-update-cmd": [
+    // ...
+    "@php artisan filament:upgrade"
+],
+```
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-[To Top](#contents)
-
+[to top ☝️](#contents)
 <br>
 <br>
 <br>
@@ -90,15 +72,17 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # Filament Access and Menu Management Plugin
 
-## Installation
+See more documentation of Filament Access and Menu Management Plugin [here](https://github.com/solutionforest/filament-access-management).
 
-Install the package via composer:
+## Installation Plugin
+
+install the package via composer:
 
 ```bash
 composer require solution-forest/filament-access-management
 ```
 
-Add the necessary trait to **User** model:
+Add the necessary trait to your User model:
 
 ```bash
 use SolutionForest\FilamentAccessManagement\Concerns\FilamentUser;
@@ -109,7 +93,7 @@ class User extends Authenticatable
 }
 ```
 
-Clear config cache:
+Clear your config cache
 
 ```bash
 php artisan optimize:clear
@@ -126,7 +110,9 @@ php artisan filament-access-management:install
 If you don't already have a user named admin, this command creates a Super Admin User with the following credentials:
 
 Name: admin
-E-mail address: admin@("slug" pattern from config("app.name")).com
+
+E-mail: admin@("slug" pattern from config("app.name")).com
+
 Password: admin
 
 You can also create the super admin user with:
@@ -135,21 +121,22 @@ You can also create the super admin user with:
 php artisan make:super-admin-user
 ```
 
-Add in **config/app.php**:
+In your config/app.php place this code in you providers section:
 
 ```bash
 'providers' => [
+    ...
     /*
-    * Package Service Providers...
-    */
-
+        * Package Service Providers...
+        */
     \SolutionForest\FilamentAccessManagement\FilamentAuthServiceProvider::class,
+    ...
 ],
 ```
 
 ### Publish Configs, Views, Translations and Migrations
 
-Publish the configs, views, translations and migrations:
+You publish the configs, views, translations and migrations with:
 
 ```bash
 php artisan vendor:publish --tag="filament-access-management-config"
@@ -175,6 +162,7 @@ Check permission:
 ```bash
 # Check by permission's name
 \SolutionForest\FilamentAccessManagement\Http\Auth\Permission::check($name)
+
 # Check by http_path
 \SolutionForest\FilamentAccessManagement\Http\Auth\Permission::checkPermission($path)
 ```
@@ -189,10 +177,11 @@ Get current user:
 
 In default, the menu created will co-exist with the original menu of filament. To override the original menu with the menu from this package, modify **/config/filament-access-management.php** as following:
 
-Set filament.navigation.enabled => true
+Set **filament.navigation.enabled => true**
 
 ```bash
 'filament' => [
+    ...
     'navigation' => [
         /**
          * Using db based filament navigation if true.
@@ -207,5 +196,13 @@ Set filament.navigation.enabled => true
          */
         'model' => Models\Menu::class,
     ]
+    ...
 ]
 ```
+
+[to top ☝️](#contents)
+<br>
+<br>
+<br>
+<br>
+<br>
