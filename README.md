@@ -72,7 +72,7 @@ Add to **composer.json**:
 
 # Filament Access and Menu Management Plugin
 
-See more documentation of Filament Access and Menu Management Plugin [here](https://github.com/solutionforest/filament-access-management).
+See more documentation of Filament Access and Menu Management Plugin [here](https://v2.filamentphp.com/plugins/access-and-menu-management).
 
 ## Installation Plugin
 
