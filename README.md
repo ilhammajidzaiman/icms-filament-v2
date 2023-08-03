@@ -14,6 +14,7 @@
     - [Instalation Filamentphp](#installation-filamentphp)
 3. [Filament Access and Menu Management Plugin](#filament-access-and-menu-management-plugin)
     - [Instalation Plugin](#installation-plugin)
+    - [Automatically generating forms and tables](#automatically-generating-forms-and-tables)
 
 <br>
 <br>
@@ -61,6 +62,26 @@ Add to **composer.json**:
     // ...
     "@php artisan filament:upgrade"
 ],
+```
+
+## Automatically generating forms and tables
+
+**The doctrine/dbal** package is required to use this functionality, install the package via composer:
+
+```bash
+composer require doctrine/dbal --dev
+```
+
+Create resource:
+
+```bash
+php artisan make:filament-resource Customer --generate
+```
+
+Create resource with soft delete:
+
+```bash
+php artisan make:filament-resource Customer --generate --soft-deletes
 ```
 
 [to top ☝️](#contents)
