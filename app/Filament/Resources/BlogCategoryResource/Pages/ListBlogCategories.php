@@ -14,7 +14,7 @@ class ListBlogCategories extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Baru'),
+            Actions\CreateAction::make(),
         ];
     }
 
