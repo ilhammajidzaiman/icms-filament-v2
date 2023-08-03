@@ -96,17 +96,10 @@ class BlogArticleResource extends Resource
                             ->label('File')
                             ->required()
                             ->maxSize(1024)
-                            ->directory('article')
+                            ->directory('articles/' . date('Y'))
                             ->image()
-                            // ->imageResizeMode('cover')
-                            // ->imageCropAspectRatio('16:9')
-                            // ->imageResizeTargetWidth('1920')
-                            // ->imageResizeTargetHeight('1080')
                             ->enableDownload()
-                            ->enableOpen()
-                            ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
-                                return (string) str($file->getClientOriginalName())->prepend(now() . '-');
-                            })
+                            ->enableOpen(),
                     ])
                     ->columnSpan(1),
             ])
@@ -132,9 +125,11 @@ class BlogArticleResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('user_id')
-                    ->label('Penulis')
-                    ->sortable(),
+                ImageColumn::make('file')
+                    ->label('File')
+                    ->circular()
+                    // ->square()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('title')
                     ->label('Judul')
                     ->sortable()
@@ -143,12 +138,17 @@ class BlogArticleResource extends Resource
                     ->label('Slug')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                ImageColumn::make('file')
-                    ->label('File')
-                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('visitor')
                     ->label('Pengunjung')
                     ->sortable(),
+                TextColumn::make('user.name')
+                    ->label('Penulis')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('category.name')
+                    ->label('Kategori')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
