@@ -96,7 +96,7 @@ class BlogArticleResource extends Resource
                             ->label('File')
                             ->required()
                             ->maxSize(1024)
-                            ->directory('articles/' . date('Y'))
+                            ->directory('articles/' . date('Y/m'))
                             ->image()
                             ->enableDownload()
                             ->enableOpen(),
@@ -127,9 +127,7 @@ class BlogArticleResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 ImageColumn::make('file')
                     ->label('File')
-                    ->circular()
-                    // ->square()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->circular(),
                 TextColumn::make('title')
                     ->label('Judul')
                     ->sortable()
