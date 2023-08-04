@@ -10,6 +10,7 @@
 # Contents
 
 1. [Laravel](#laravel)
+    - [Instalation Laravel](#installation-laravel)
 2. [Filamentphp](#filamentphp)
     - [Instalation Filamentphp](#installation-filamentphp)
     - [Automatically generating forms and tables](#automatically-generating-forms-and-tables)
@@ -26,7 +27,7 @@
 
 See more documentation of [here](https://laravel.com/docs/).
 
-## Installation
+## Installation Laravel
 
 Install larvel using composer:
 
@@ -55,7 +56,7 @@ composer require filament/filament
 composer require filament/filament:"^2.0"
 ```
 
-Add to **composer.json**:
+Add to `composer.json`:
 
 ```bash
 "post-update-cmd": [
@@ -66,7 +67,7 @@ Add to **composer.json**:
 
 ## Automatically generating forms and tables
 
-**The doctrine/dbal** package is required to use this functionality, install the package via composer:
+Install the package via composer to use automatically generating forms and tables, package `doctrine/dbal` is required to use this functionality:
 
 ```bash
 composer require doctrine/dbal --dev
@@ -130,11 +131,11 @@ php artisan filament-access-management:install
 
 If you don't already have a user named admin, this command creates a Super Admin User with the following credentials:
 
-Name: admin
+`Name: admin`
 
-E-mail: admin@("slug" pattern from config("app.name")).com
+`E-mail: admin@("slug" pattern from config("app.name")).com`
 
-Password: admin
+`Password: admin`
 
 You can also create the super admin user with:
 
@@ -142,7 +143,7 @@ You can also create the super admin user with:
 php artisan make:super-admin-user
 ```
 
-In your config/app.php place this code in you providers section:
+In your `config/app.php` place this code in you providers section:
 
 ```bash
 'providers' => [
@@ -196,9 +197,7 @@ Get current user:
 
 ## Advance Usage
 
-In default, the menu created will co-exist with the original menu of filament. To override the original menu with the menu from this package, modify **/config/filament-access-management.php** as following:
-
-Set **filament.navigation.enabled => true**
+In default, the menu created will co-exist with the original menu of filament. To override the original menu with the menu from this package, modify `/config/filament-access-management.php` as following: Set `filament.navigation.enabled => true`
 
 ```bash
 'filament' => [
