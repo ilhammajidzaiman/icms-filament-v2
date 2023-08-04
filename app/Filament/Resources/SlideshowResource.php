@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use Closure;
 use stdClass;
-use Filament\Forms;
 use Filament\Tables;
 use App\Models\Slideshow;
 use Illuminate\Support\Str;
@@ -19,7 +18,6 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SlideshowResource\Pages;
