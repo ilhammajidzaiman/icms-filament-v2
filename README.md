@@ -12,9 +12,9 @@
 1. [Laravel](#laravel)
 2. [Filamentphp](#filamentphp)
     - [Instalation Filamentphp](#installation-filamentphp)
+    - [Automatically generating forms and tables](#automatically-generating-forms-and-tables)
 3. [Filament Access and Menu Management Plugin](#filament-access-and-menu-management-plugin)
     - [Instalation Plugin](#installation-plugin)
-    - [Automatically generating forms and tables](#automatically-generating-forms-and-tables)
 
 <br>
 <br>
