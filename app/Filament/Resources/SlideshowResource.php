@@ -67,7 +67,7 @@ class SlideshowResource extends Resource
                             ->label('File')
                             ->required()
                             ->maxSize(1024)
-                            ->directory('slideshows/' . date('Y'))
+                            ->directory('slideshows/' . date('Y/m'))
                             ->image()
                             ->enableDownload()
                             ->enableOpen(),
