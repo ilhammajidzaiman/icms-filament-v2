@@ -42,10 +42,6 @@ class SlideshowResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        Toggle::make('is_active')
-                            ->label('Status')
-                            ->required()
-                            ->default('1'),
                         TextInput::make('title')
                             ->label('Judul')
                             ->required()
@@ -71,6 +67,10 @@ class SlideshowResource extends Resource
                             ->image()
                             ->enableDownload()
                             ->enableOpen(),
+                        Toggle::make('is_active')
+                            ->label('Status')
+                            ->required()
+                            ->default('1'),
                     ])
             ]);
     }
@@ -152,6 +152,7 @@ class SlideshowResource extends Resource
         return [
             'index' => Pages\ListSlideshows::route('/'),
             'create' => Pages\CreateSlideshow::route('/create'),
+            'view' => Pages\ViewSlideshow::route('/{record}'),
             'edit' => Pages\EditSlideshow::route('/{record}/edit'),
         ];
     }

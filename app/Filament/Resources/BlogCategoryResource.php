@@ -121,6 +121,7 @@ class BlogCategoryResource extends Resource
         return [
             'index' => Pages\ListBlogCategories::route('/'),
             'create' => Pages\CreateBlogCategory::route('/create'),
+            'view' => Pages\ViewBlogCategory::route('/{record}'),
             'edit' => Pages\EditBlogCategory::route('/{record}/edit'),
         ];
     }
