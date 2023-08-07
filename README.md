@@ -79,6 +79,12 @@ Create resource:
 php artisan make:filament-resource Customer --generate
 ```
 
+Add view page for view dwtail data without modal:
+
+```bash
+php artisan make:filament-page ViewCustomer --resource=CustomerResource --type=ViewRecord
+```
+
 Create resource with soft delete:
 
 ```bash
