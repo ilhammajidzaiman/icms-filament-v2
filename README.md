@@ -91,6 +91,36 @@ Create resource with soft delete:
 php artisan make:filament-resource Customer --generate --soft-deletes
 ```
 
+Add observer for deleting file one storage:
+
+```bash
+php artisan make:observer CustomerObserver --model=Customer
+```
+
+Add function on file `app\Observer\CustomerObserver.php`
+
+On update:
+
+```bash
+public function updated(Customer $customer): void
+    {
+        if ($customer->isDirty('file')) {
+            Storage::disk('public')->delete($customer->getOriginal('file'));
+        }
+    }
+```
+
+On delete or softdelete:
+
+```bash
+public function forceDeleted(Customer $customer): void
+    {
+        if (!is_null($customer->file)) {
+            Storage::disk('public')->delete($customer->file);
+        }
+    }
+```
+
 [to top ☝️](#contents)
 <br>
 <br>
