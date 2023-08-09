@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('slideshows', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_active')->comment('status');
-            $table->string('title')->unique()->comment('judul');
-            $table->string('slug')->unique()->comment('slug dari judul');
-            $table->string('subtitle')->nullable()->comment('sub title');
-            $table->string('file')->nullable()->comment('file gambar');
+            $table->string('title')->nullable()->unique()->comment('judul');
+            $table->string('slug')->nullable()->unique()->comment('slug');
+            $table->string('subtitle')->nullable()->comment('subtitle');
+            $table->string('file')->comment('gambar');
             $table->timestamps();
             $table->softDeletes();
         });

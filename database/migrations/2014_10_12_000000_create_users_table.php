@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_active')->nullable()->comment('status');
+            $table->boolean('is_active')->comment('status');
             $table->string('name')->comment('nama');
             $table->string('email')->unique()->comment('email aktif');
-            $table->timestamp('email_verified_at')->nullable()->comment('verifikasi email');
-            $table->string('password')->comment('kata sandi');
-            $table->string('file')->nullable()->comment('file gambar');
+            $table->timestamp('email_verified_at')->nullable()->comment('email verifikasi');
+            $table->string('password')->comment('password');
+            $table->string('file')->nullable()->comment(' gambar');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

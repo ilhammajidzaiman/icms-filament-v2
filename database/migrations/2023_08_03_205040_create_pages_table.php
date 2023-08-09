@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->boolean('is_active')->comment('status');
             $table->string('title')->unique()->comment('judul');
-            $table->string('slug')->unique()->comment('slug dari judul');
-            $table->binary('content')->comment('bagian isi halaman');
+            $table->string('slug')->unique()->comment('slug');
+            $table->binary('content')->comment('isi');
             $table->timestamps();
             $table->softDeletes();
         });

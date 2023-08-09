@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreignId('blog_category_id')->constrained('blog_categories')->cascadeOnUpdate()->restrictOnDelete()->comment('id table blog_categories');
             $table->boolean('is_active')->comment('status');
             $table->string('title')->unique()->comment('judul');
-            $table->string('slug')->unique()->comment('slug dari judul');
-            $table->binary('content')->comment('bagian isi artikel');
-            $table->string('tags')->nullable()->comment('menandai');
-            $table->string('file')->nullable()->comment('file gambar artikel');
+            $table->string('slug')->unique()->comment('slug');
+            $table->binary('content')->comment('isi ');
+            $table->string('tags')->comment('tanda');
+            $table->string('file')->comment('gambar');
             $table->bigInteger('visitor')->nullable()->comment('jumlah pengunjung');
             $table->timestamps();
             $table->softDeletes();
