@@ -1,21 +1,17 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
 # Contents
 
 1. [Laravel](#laravel)
     - [Instalation Laravel](#installation-laravel)
 2. [Filamentphp](#filamentphp)
     - [Instalation Filamentphp](#installation-filamentphp)
-    - [Automatically generating forms and tables](#automatically-generating-forms-and-tables)
+    - [Automatically Generating](#automatically-generating)
 3. [Filament Access and Menu Management Plugin](#filament-access-and-menu-management-plugin)
     - [Instalation Plugin](#installation-plugin)
+    - [Publish Configs](#publish-configs)
+    - [Migration](#migration)
+    - [Advance Usage](#advance-usage)
 
 <br>
 <br>
@@ -65,7 +61,7 @@ Add to `composer.json`:
 ],
 ```
 
-## Automatically generating forms and tables
+## Automatically Generating
 
 Install the package via composer to use automatically generating forms and tables, package `doctrine/dbal` is required to use this functionality:
 
@@ -97,9 +93,7 @@ Add observer for deleting file one storage:
 php artisan make:observer CustomerObserver --model=Customer
 ```
 
-Add function on file `app\Observer\CustomerObserver.php`
-
-On update:
+Add function on file `app\Observer\CustomerObserver.php` on update:
 
 ```bash
 public function updated(Customer $customer): void
@@ -134,13 +128,13 @@ See more documentation of Filament Access and Menu Management Plugin [here](http
 
 ## Installation Plugin
 
-install the package via composer:
+Install the package via composer:
 
 ```bash
 composer require solution-forest/filament-access-management
 ```
 
-Add the necessary trait to your User model:
+Add the necessary trait to your `User` model:
 
 ```bash
 use SolutionForest\FilamentAccessManagement\Concerns\FilamentUser;
@@ -151,35 +145,7 @@ class User extends Authenticatable
 }
 ```
 
-Clear your config cache
-
-```bash
-php artisan optimize:clear
-# or
-php artisan config:clear
-```
-
-Execute the commands:
-
-```bash
-php artisan filament-access-management:install
-```
-
-If you don't already have a user named admin, this command creates a Super Admin User with the following credentials:
-
-`Name: admin`
-
-`E-mail: admin@("slug" pattern from config("app.name")).com`
-
-`Password: admin`
-
-You can also create the super admin user with:
-
-```bash
-php artisan make:super-admin-user
-```
-
-In your `config/app.php` place this code in you providers section:
+In `config/app.php` place this code in you providers section:
 
 ```bash
 'providers' => [
@@ -192,9 +158,21 @@ In your `config/app.php` place this code in you providers section:
 ],
 ```
 
-### Publish Configs, Views, Translations and Migrations
+Clear config cache:
 
-You publish the configs, views, translations and migrations with:
+```bash
+php artisan optimize:clear
+```
+
+Execute the commands:
+
+```bash
+php artisan filament-access-management:install
+```
+
+### Publish Configs
+
+Publish the configs, views, translations and migrations with:
 
 ```bash
 php artisan vendor:publish --tag="filament-access-management-config"
@@ -205,30 +183,24 @@ php artisan vendor:publish --tag="filament-access-management-migrations"
 
 ## Migration
 
+Run Migration:
+
 ```bash
 php artisan migrate
 ```
 
-Create super admin user:
+If don't already have a user named admin, this command creates a Super Admin User with the following credentials:
+
+`Name: admin`
+
+`E-mail: admin@("slug" pattern from config("app.name")).com`
+
+`Password: admin`
+
+You can also create the super admin user:
 
 ```bash
 php artisan make:super-admin-user
-```
-
-Check permission:
-
-```bash
-# Check by permission's name
-\SolutionForest\FilamentAccessManagement\Http\Auth\Permission::check($name)
-
-# Check by http_path
-\SolutionForest\FilamentAccessManagement\Http\Auth\Permission::checkPermission($path)
-```
-
-Get current user:
-
-```bash
-\SolutionForest\FilamentAccessManagement\Facades\FilamentAuthenticate::user();
 ```
 
 ## Advance Usage
@@ -257,8 +229,3 @@ In default, the menu created will co-exist with the original menu of filament. T
 ```
 
 [to top ☝️](#contents)
-<br>
-<br>
-<br>
-<br>
-<br>
