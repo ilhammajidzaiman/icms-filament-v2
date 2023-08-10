@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_active')->comment('status');
+            $table->boolean('is_active')->default(1)->comment('status');
             $table->string('title')->unique()->comment('judul');
             $table->string('slug')->unique()->comment('slug');
             $table->binary('content')->comment('isi');

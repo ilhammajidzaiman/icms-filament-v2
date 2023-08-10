@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->restrictOnDelete()->comment('id table users');
             $table->foreignId('blog_category_id')->constrained('blog_categories')->cascadeOnUpdate()->restrictOnDelete()->comment('id table blog_categories');
-            $table->boolean('is_active')->comment('status');
+            $table->boolean('is_active')->default(1)->comment('status');
             $table->string('title')->unique()->comment('judul');
             $table->string('slug')->unique()->comment('slug');
             $table->binary('content')->comment('isi ');

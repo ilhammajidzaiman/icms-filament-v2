@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('blog_categories', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_active')->comment('status');
+            $table->boolean('is_active')->default(1)->comment('status');
             $table->string('name')->unique()->comment('nama');
             $table->string('slug')->unique()->comment('slug');
             $table->timestamps();

@@ -13,9 +13,11 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BlogCategoryResource\Pages;
@@ -38,6 +40,10 @@ class BlogCategoryResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
+                        Toggle::make('is_active')
+                            ->label('Status')
+                            ->required()
+                            ->default('1'),
                         TextInput::make('name')
                             ->label('Nama')
                             ->required()
@@ -95,6 +101,9 @@ class BlogCategoryResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                ToggleColumn::make('is_active')
+                    ->label('Status')
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
