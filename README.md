@@ -11,12 +11,6 @@
     - [Migration](#migration)
     - [Advance Usage](#advance-usage)
 
-<br>
-<br>
-<br>
-<br>
-<br>
-
 # Laravel
 
 See more documentation of [here](https://laravel.com/docs/).
@@ -30,11 +24,6 @@ composer create-project laravel/laravel example-app
 ```
 
 [to top ☝️](#contents)
-<br>
-<br>
-<br>
-<br>
-<br>
 
 # Filamentphp
 
@@ -114,11 +103,6 @@ public function forceDeleted(Customer $customer): void
 ```
 
 [to top ☝️](#contents)
-<br>
-<br>
-<br>
-<br>
-<br>
 
 # Filament Access and Menu Management Plugin
 
