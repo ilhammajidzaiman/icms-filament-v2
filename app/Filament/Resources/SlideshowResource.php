@@ -44,7 +44,6 @@ class SlideshowResource extends Resource
                     ->schema([
                         TextInput::make('title')
                             ->label('Judul')
-                            ->required()
                             ->maxLength(255)
                             ->reactive()
                             ->afterStateUpdated(function (Closure $set, $state) {
@@ -52,7 +51,6 @@ class SlideshowResource extends Resource
                             }),
                         TextInput::make('slug')
                             ->label('Slug')
-                            ->required()
                             ->maxLength(255)
                             ->disabled(),
                         Textarea::make('subtitle')
