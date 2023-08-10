@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c63f2752badf9929e73255a2811204f",
+    "content-hash": "9956d2728a74ca4a34dc2452e5a7c532",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -3941,16 +3941,16 @@
         },
         {
             "name": "solution-forest/filament-access-management",
-            "version": "1.0",
+            "version": "1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/solutionforest/filament-access-management.git",
-                "reference": "0031c0f70e141c397993aef7fb187486215447b9"
+                "reference": "fc8b39410aeb61136246e97c615f3c6239cbd4ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/solutionforest/filament-access-management/zipball/0031c0f70e141c397993aef7fb187486215447b9",
-                "reference": "0031c0f70e141c397993aef7fb187486215447b9",
+                "url": "https://api.github.com/repos/solutionforest/filament-access-management/zipball/fc8b39410aeb61136246e97c615f3c6239cbd4ce",
+                "reference": "fc8b39410aeb61136246e97c615f3c6239cbd4ce",
                 "shasum": ""
             },
             "require": {
@@ -4015,7 +4015,7 @@
                 "issues": "https://github.com/solution-forest/filament-access-management/issues",
                 "source": "https://github.com/solution-forest/filament-access-management"
             },
-            "time": "2023-04-24T03:34:24+00:00"
+            "time": "2023-07-31T05:17:55+00:00"
         },
         {
             "name": "solution-forest/filament-tree",
